@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      blue-gradient-25907-2560x1600_0: 7907916259591467677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
