@@ -5,11 +5,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    Vector2 startPos;
+    Vector2 checkPointPos;
 
     private void Start()
     {
-        startPos = transform.position;
+        checkPointPos = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +20,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void UpdateCheckPoint(Vector2 pos)
+    {
+        checkPointPos = pos;
+    }
+
     void Die()
     {
         Respawn();
@@ -27,6 +32,6 @@ public class GameController : MonoBehaviour
 
     void Respawn()
     {
-        transform.position = startPos;
+        transform.position = checkPointPos;
     }
 }
