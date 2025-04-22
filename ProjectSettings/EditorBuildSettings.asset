@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 1cb4f8dfa01ab45caaa08ab2c34529fc
   - enabled: 1
-    path: Assets/Scenes/Exercise.unity
+    path: Assets/Scenes/Food.unity
     guid: bcec4fe4ddc234446a7dc54720536599
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
