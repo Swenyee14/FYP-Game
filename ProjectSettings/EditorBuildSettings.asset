@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Exercise.unity
     guid: bcec4fe4ddc234446a7dc54720536599
+  - enabled: 1
+    path: Assets/Scenes/Food.unity
+    guid: 7976d6e13c4544202ba44d0699ec02a4
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
