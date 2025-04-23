@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+public class JumpPad : MonoBehaviour
 {
     GameController gameController;
     audioManager audioManager;
@@ -17,8 +17,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            audioManager.PlaySFX(audioManager.checkpoint);
-            gameController.UpdateCheckPoint(transform.position);
+            audioManager.PlaySFX(audioManager.jumpPad);
         }
     }
 }
