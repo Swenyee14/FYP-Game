@@ -6,12 +6,14 @@ public class GameController : MonoBehaviour
 {
 
     Vector2 checkPointPos;
+    SpriteRenderer sprite;
 
     audioManager audioManager;
 
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -34,8 +36,9 @@ public class GameController : MonoBehaviour
 
     void Die()
     {
+        StartCoroutine(RespawnAfterDelay(1.25f));
         audioManager.PlaySFX(audioManager.death);
-        StartCoroutine(RespawnAfterDelay(5f)); 
+        sprite.enabled = false;
     }
 
     IEnumerator RespawnAfterDelay(float delay)
@@ -49,5 +52,6 @@ public class GameController : MonoBehaviour
     {
         transform.position = checkPointPos;
         audioManager.PlaySFX(audioManager.respawn);
+        sprite.enabled = true;
     }
 }
