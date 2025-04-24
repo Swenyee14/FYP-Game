@@ -18,6 +18,7 @@ public class audioManager : MonoBehaviour
     public AudioClip jumpPad;
     public AudioClip fullHP;
     public AudioClip fullHunger;
+    public AudioClip collectFood;
 
     private void Start()
     {

@@ -24,6 +24,6 @@ public class JunkManager : MonoBehaviour
 
     public void ChangeJunk(int num)
     {
-        junkFood = +num;
+        junkFood += num;
     }
 }

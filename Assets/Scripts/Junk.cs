@@ -7,6 +7,12 @@ public class Junk : MonoBehaviour
     [SerializeField] private int value;
     private bool triggered;
     private JunkManager junkManager;
+    audioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
+    }
 
     private void Start()
     {
@@ -20,6 +26,7 @@ public class Junk : MonoBehaviour
             triggered = true;
             junkManager.ChangeJunk(value);
             Destroy(gameObject);
+            audioManager.PlaySFX(audioManager.collectFood);
         }
     }
 }

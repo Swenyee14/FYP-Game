@@ -24,6 +24,6 @@ public class GoodFoodManager : MonoBehaviour
 
     public void ChangeGoodFood(int num)
     {
-        goodFood = +num;
+        goodFood += num;
     }
 }
