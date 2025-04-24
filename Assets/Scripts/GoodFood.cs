@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class GoodFood : MonoBehaviour
 {
     [SerializeField] private int value;
     private bool triggered;
-    private CoinManager coinManager;
+    private GoodFoodManager goodFoodManager;
 
     private void Start()
     {
-        coinManager = CoinManager.instance;
+        goodFoodManager = GoodFoodManager.instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && !triggered)
+        if (collision.CompareTag("Player") && !triggered)
         {
             triggered = true;
-            coinManager.ChangeCoins(value);
+            goodFoodManager.ChangeGoodFood(value);
             Destroy(gameObject);
         }
     }
