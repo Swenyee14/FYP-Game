@@ -9,7 +9,6 @@ public class movement : MonoBehaviour
     float horizontalMovement = 0f;
     public float speed = 40f;
     bool jump = false;
-    bool crouch = false;
 
     void Update()
     {
@@ -19,18 +18,11 @@ public class movement : MonoBehaviour
         {
             jump = true;
         }
-        if (Input.GetButtonDown("Crouch"))
-        {
-            crouch = true;
-        } else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
-        }
     }
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMovement * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMovement * Time.fixedDeltaTime, jump);
         jump = false;
         
     }

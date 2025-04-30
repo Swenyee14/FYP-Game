@@ -3,20 +3,18 @@ using UnityEngine.Events;
 
 public class checks : MonoBehaviour
 {
-	[SerializeField] private float m_JumpForce = 400f;                          
-	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          
-	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  
-	[SerializeField] private bool m_AirControl = false;                         
-	[SerializeField] private LayerMask m_WhatIsGround;                          
-	[SerializeField] private Transform m_GroundCheck;                           
-	[SerializeField] private Transform m_CeilingCheck;                                        
+	[SerializeField] private float JumpPower = 400f;                                   
+	[Range(0, .1f)] [SerializeField] private float MoveSmooth = .05f;  
+	[SerializeField] private bool AirMovement = false;                         
+	[SerializeField] private LayerMask whatIsGround;                          
+	[SerializeField] private Transform groundCheck;                                                                  
 
-	const float k_GroundedRadius = .2f; 
-	private bool m_Grounded;            
+	const float groundRadius = .2f; 
+	private bool grounded;            
 	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  
-	private Vector3 m_Velocity = Vector3.zero;
-	public UnityEvent OnLandEvent;
+	private bool direction = true;  
+	private Vector3 speed = Vector3.zero;
+	public UnityEvent landed;
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
@@ -25,56 +23,55 @@ public class checks : MonoBehaviour
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-		if (OnLandEvent == null)
-			OnLandEvent = new UnityEvent();
+		if (landed == null)
+			landed = new UnityEvent();
 	}
 
 	private void FixedUpdate()
 	{
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
+		bool wasGrounded = grounded;
+		grounded = false;
 
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundRadius, whatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
-				m_Grounded = true;
+				grounded = true;
 				if (!wasGrounded)
-					OnLandEvent.Invoke();
+					landed.Invoke();
 			}
 		}
 	}
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool jump)
 	{
-		if (m_Grounded || m_AirControl)
+		if (grounded || AirMovement)
 		{
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref speed, MoveSmooth);
 		
-			if (move > 0 && !m_FacingRight)
+			if (move > 0 && !direction)
 			{
 				Flip();
 			}
 			
-			else if (move < 0 && m_FacingRight)
+			else if (move < 0 && direction)
 			{
 				Flip();
 			}
 		}
 		
-		if (m_Grounded && jump)
+		if (grounded && jump)
 		{
-			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			grounded = false;
+			m_Rigidbody2D.AddForce(new Vector2(0f, JumpPower));
 		}
 	}
 
-
 	private void Flip()
 	{
-		m_FacingRight = !m_FacingRight;
+		direction = !direction;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
