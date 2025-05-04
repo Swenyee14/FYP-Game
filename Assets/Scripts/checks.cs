@@ -14,7 +14,6 @@ public class checks : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool direction = true;  
 	private Vector3 speed = Vector3.zero;
-	public UnityEvent landed;
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
@@ -22,14 +21,10 @@ public class checks : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
-		if (landed == null)
-			landed = new UnityEvent();
 	}
 
 	private void FixedUpdate()
 	{
-		bool wasGrounded = grounded;
 		grounded = false;
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundRadius, whatIsGround);
@@ -38,8 +33,6 @@ public class checks : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				grounded = true;
-				if (!wasGrounded)
-					landed.Invoke();
 			}
 		}
 	}

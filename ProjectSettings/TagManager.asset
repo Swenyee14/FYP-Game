@@ -47,14 +47,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Decor
+    uniqueID: 787201123
+    locked: 0
   - name: Traps
     uniqueID: 1852169319
     locked: 0
   - name: Ground
     uniqueID: 979035137
-    locked: 0
-  - name: Decor
-    uniqueID: 787201123
     locked: 0
   - name: Player
     uniqueID: 3599030089

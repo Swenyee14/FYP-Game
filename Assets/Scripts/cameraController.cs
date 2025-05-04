@@ -12,7 +12,6 @@ public class cameraController : MonoBehaviour
 
     public Vector3 positionOffset;
 
-    [Header("Axis Limitation")]
     public Vector2 xLimit;
     public Vector2 yLimit;
 
